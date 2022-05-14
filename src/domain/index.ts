@@ -18,15 +18,7 @@ const createNGINXConfig = () => {
   }
   
   if (!fs.existsSync(`${cwd}/conf.d`)) {
-    exec("sudo mkdir conf.d", { cwd }, (error, stdout) => {
-      if (error) {
-        console.log(error)
-        console.log(Color.FgRed + 'Couldn\'t create conf.d directory' + Color.Reset)
-        return;
-      }
-
-      console.log(Color.FgBlue + stdout + Color.Reset)
-    });
+    fs.mkdirSync(`${cwd}/conf.d`);
   }
 
   fs.writeFileSync(
@@ -49,7 +41,7 @@ const createNGINXConfig = () => {
       console.log(Color.FgBlue + stdout + Color.Reset)
   });
 
-  exec(`sudo certbot --nginx ${domains.map(domain => `-d ${domain} `)}`, { cwd }, (error, stdout) => {
+  exec(`sudo certbot --nginx ${domains.map(domain => `-d ${domain} `)}`.replace(',', ''), { cwd }, (error, stdout) => {
     if (error) {
       console.log(error)
       console.log(Color.FgRed + 'Couldn\'t run certbot' + Color.Reset)
@@ -58,8 +50,6 @@ const createNGINXConfig = () => {
 
     console.log(Color.FgBlue + stdout + Color.Reset)
   });
-
-
 };
 
 export const setupDomain = () => {
