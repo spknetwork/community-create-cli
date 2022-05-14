@@ -1,6 +1,5 @@
 import fs from 'fs';
 import p from 'prompt-sync'
-import {createWriteStream} from 'fs-admin';
 import { exec } from 'child_process';
 import { Color } from "../color";
 
@@ -19,7 +18,15 @@ const createNGINXConfig = () => {
   }
   
   if (!fs.existsSync(`${cwd}/conf.d`)) {
-    createWriteStream(`${cwd}/conf.d`);
+    exec("sudo mkdir conf.d", { cwd }, (error, stdout) => {
+      if (error) {
+        console.log(error)
+        console.log(Color.FgRed + 'Couldn\'t create conf.d directory' + Color.Reset)
+        return;
+      }
+
+      console.log(Color.FgBlue + stdout + Color.Reset)
+    });
   }
 
   fs.writeFileSync(

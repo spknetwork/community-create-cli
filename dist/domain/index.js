@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.setupDomain = void 0;
 const fs_1 = __importDefault(require("fs"));
 const prompt_sync_1 = __importDefault(require("prompt-sync"));
-const fs_admin_1 = require("fs-admin");
 const child_process_1 = require("child_process");
 const color_1 = require("../color");
 const prompt = (0, prompt_sync_1.default)({ sigint: true });
@@ -20,7 +19,14 @@ const createNGINXConfig = () => {
         return;
     }
     if (!fs_1.default.existsSync(`${cwd}/conf.d`)) {
-        (0, fs_admin_1.createWriteStream)(`${cwd}/conf.d`);
+        (0, child_process_1.exec)("sudo mkdir conf.d", { cwd }, (error, stdout) => {
+            if (error) {
+                console.log(error);
+                console.log(color_1.Color.FgRed + 'Couldn\'t create conf.d directory' + color_1.Color.Reset);
+                return;
+            }
+            console.log(color_1.Color.FgBlue + stdout + color_1.Color.Reset);
+        });
     }
     fs_1.default.writeFileSync(`${cwd}/conf.d/${domains[0]}.conf`, `
     server { root /var/www/html; server_name ${domains.join(' ')};\n
