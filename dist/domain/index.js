@@ -36,14 +36,6 @@ const createNGINXConfig = () => {
         }
         console.log(color_1.Color.FgBlue + stdout + color_1.Color.Reset);
     });
-    (0, child_process_1.exec)(`sudo certbot --nginx ${domains.map(domain => `-d ${domain} `)}`.replace(',', ''), { cwd }, (error, stdout) => {
-        if (error) {
-            console.log(error);
-            console.log(color_1.Color.FgRed + 'Couldn\'t run certbot' + color_1.Color.Reset);
-            return;
-        }
-        console.log(color_1.Color.FgBlue + stdout + color_1.Color.Reset);
-    });
 };
 const setupDomain = () => {
     createNGINXConfig();
