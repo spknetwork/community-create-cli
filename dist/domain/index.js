@@ -22,10 +22,10 @@ const createNGINXConfig = () => {
         fs_1.default.mkdirSync(`${cwd}/conf.d`);
     }
     fs_1.default.writeFileSync(`${cwd}/conf.d/${domains[0]}.conf`, `
-    server { root /var/www/html; server_name ${domains.join(' ')};\n
-      location / {\n
-          proxy_pass http://localhost:9000;\n
-      }\n
+    server { root /var/www/html; server_name ${domains.join(' ')};
+      location / {
+          proxy_pass http://localhost:9000;
+      }
     }
   `);
     (0, child_process_1.exec)("sudo nginx -t && sudo nginx -s reload", { cwd }, (error, stdout) => {

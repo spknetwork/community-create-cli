@@ -24,10 +24,10 @@ const createNGINXConfig = () => {
   fs.writeFileSync(
     `${cwd}/conf.d/${domains[0]}.conf`,
     `
-    server { root /var/www/html; server_name ${domains.join(' ')};\n
-      location / {\n
-          proxy_pass http://localhost:9000;\n
-      }\n
+    server { root /var/www/html; server_name ${domains.join(' ')};
+      location / {
+          proxy_pass http://localhost:9000;
+      }
     }
   `);
 
