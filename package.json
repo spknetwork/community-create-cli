@@ -1,6 +1,6 @@
 {
   "name": "@spknetwork/community-create",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Breakaway community creation cli",
   "main": "dist/index.js",
   "scripts": {

@@ -3,8 +3,8 @@ import { setupDomain } from "./domain";
 import { setupPackages } from "./init";
 import { setupServer } from "./server";
 
-const main = () => {
-  setupPackages();
+const main = async () => {
+  await setupPackages();
   setupServer();
   setupDomain();
 }
