@@ -7,7 +7,7 @@ const prompt = require("prompt-sync")({ sigint: true });
 const getRepo = () => {
   console.log(Color.FgBlue + 'Pulling community-fork repository', Color.Reset)
   if (!fs.existsSync('community-fork')) {
-    exec('git clone https://github.com/3speaknetwork/community-fork', (error, stdout) => {
+    exec('git clone https://github.com/spknetwork/community-fork', (error, stdout) => {
       if (error) {
         console.log(error)
         console.log(Color.FgRed + 'Couldn\'t copy repository' + Color.Reset)
