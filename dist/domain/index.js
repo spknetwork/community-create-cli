@@ -11,7 +11,7 @@ const color_1 = require("../color");
 const prompt = (0, prompt_sync_1.default)({ sigint: true });
 const createNGINXConfig = () => {
     const cwd = process.platform === "darwin" ? '/opt/homebrew/etc/nginx' : '/etc/nginx';
-    const domains = prompt(color_1.Color.FgWhite + 'Input domains you want to use <example.com,www.example.com>: ' + color_1.Color.Reset).split(',');
+    const domains = process.argv[5] ? process.argv[5].split(',') : prompt(color_1.Color.FgWhite + 'Input domains you want to use <example.com,www.example.com>: ' + color_1.Color.Reset).split(',');
     if (!fs_1.default.existsSync(cwd)) {
         console.log(color_1.Color.FgRed +
             "Please install NGINX using sudo apt install nginx or checking out NGINX documentation: https://www.nginx.com/resources/wiki/start/topics/tutorials/install/" +

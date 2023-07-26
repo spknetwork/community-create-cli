@@ -22,9 +22,9 @@ const getRepo = () => {
 
 const createEnv = () => {
   console.log(Color.FgBlue + 'Creating .env.local file', Color.Reset)
-  let hive_id = prompt(Color.FgWhite + "Community hive ID <hive-12345>: " + Color.Reset);
-  let theme = prompt(Color.FgWhite + "Theme <sky|burning|dusk>: " + Color.Reset);
-  let tags = prompt(Color.FgWhite + "Tags <3spk,spk,OTHERTAG>: " + Color.Reset);
+  let hive_id = process.argv[2] ? process.argv[2] : prompt(Color.FgWhite + "Community hive ID <hive-12345>: " + Color.Reset);
+  let theme = process.argv[3] ? process.argv[3] : prompt(Color.FgWhite + "Theme <sky|burning|dusk>: " + Color.Reset);
+  let tags = process.argv[4] ? process.argv[4] : prompt(Color.FgWhite + "Tags <3spk,spk,OTHERTAG>: " + Color.Reset);
 
   fs.writeFileSync('community-fork/.env.local', `HIVE_ID=${hive_id}\nTHEME=${theme}\nTAGS=${tags}`)
   console.log(Color.FgGreen + 'Successfully created .env.local file' + Color.Reset)

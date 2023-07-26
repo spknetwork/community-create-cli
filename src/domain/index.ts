@@ -7,7 +7,7 @@ const prompt = p({ sigint: true });
 
 const createNGINXConfig = () => {
   const cwd = process.platform === "darwin" ? '/opt/homebrew/etc/nginx' : '/etc/nginx'
-  const domains = prompt(Color.FgWhite + 'Input domains you want to use <example.com,www.example.com>: ' + Color.Reset).split(',');
+  const domains = process.argv[5] ? process.argv[5].split(',') : prompt(Color.FgWhite + 'Input domains you want to use <example.com,www.example.com>: ' + Color.Reset).split(',');
   if (!fs.existsSync(cwd)) {
     console.log(
       Color.FgRed +
